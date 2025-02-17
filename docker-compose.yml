@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  build-env:
+    image: alpine:3.18
+    container_name: tsh-build-tcp
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./:/build
+    working_dir: /build
+
+    # command: /bin/sh #这个用来调试用的
+    command: /bin/sh -c "make clean && make linux"
+    # command: /bin/sh -c "make clean && make linux DEBUG=1"
+    stdin_open: true
+    tty: true
