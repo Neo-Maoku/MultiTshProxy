@@ -83,24 +83,24 @@
  
      /* fork into background */
  
-    //  pid = fork();
+     pid = fork();
  
-    //  if( pid < 0 )
-    //  {
-    //      return( 1 );
-    //  }
+     if( pid < 0 )
+     {
+         return( 1 );
+     }
  
-    //  if( pid != 0 )
-    //  {
-    //      return( 0 );
-    //  }
+     if( pid != 0 )
+     {
+         return( 0 );
+     }
  
-    //  /* create a new session */
+     /* create a new session */
  
-    //  if( setsid() < 0 )
-    //  {
-    //      return( 2 );
-    //  }
+     if( setsid() < 0 )
+     {
+         return( 2 );
+     }
  
      /* close all file descriptors */
  
@@ -162,21 +162,6 @@
              close(client);
              continue;
          }
- 
-         /* the child forks and then exits so that the grand-child's
-          * father becomes init (this to avoid becoming a zombie) */
- 
-        //  pid = fork();
- 
-        //  if( pid < 0 )
-        //  {
-        //      return( 8 );
-        //  }
- 
-        //  if( pid != 0 )
-        //  {
-        //      return( 9 );
-        //  }
  
          /* setup the packet encryption layer */
  

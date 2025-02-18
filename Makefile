@@ -10,7 +10,7 @@ HARDENING_FLAGS=-fstack-protector-strong -D_FORTIFY_SOURCE=2
 ifdef DEBUG
     COMMON_FLAGS=-O0 -g -W -Wall $(STATIC_FLAGS) $(PIE_FLAGS) $(HARDENING_FLAGS) -DDEBUG
 else
-    COMMON_FLAGS=-O2 -W -Wall $(STATIC_FLAGS) $(PIE_FLAGS) $(HARDENING_FLAGS)
+    COMMON_FLAGS=-O0 -W -Wall $(STATIC_FLAGS) $(PIE_FLAGS) $(HARDENING_FLAGS)
 endif
 
 all:
@@ -22,7 +22,7 @@ all:
 	@echo
 
 clean:
-	rm -f *.o tsh tshd
+	rm -f *.o tsh tshd-tcp
 
 linux:
 	gcc $(COMMON_FLAGS) -o tsh $(CLIENT_OBJ)

@@ -40,15 +40,11 @@
      char password[128] = {0};
      memcpy(password, secret, strlen(secret));
  
-     if (argc < 2) {
-         fprintf(stderr, "Usage: %s <host/cb> [identifier]\n", argv[0]);
+     if (argc != 2) {
+         fprintf(stderr, "Usage: %s [16位的identifier]\n", argv[0]);
          return 1;
      }
  
-     if (argc != 2) {
-         fprintf(stderr, "Usage in callback mode: %s cb <identifier>\n", argv[0]);
-         return 1;
-     }
      if (strlen(argv[1]) != MAX_ID_LENGTH) {
          fprintf(stderr, "Identifier must be exactly %d characters\n", MAX_ID_LENGTH);
          return 1;

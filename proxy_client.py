@@ -76,7 +76,6 @@ class WindowsPtyClient:
                 size_data[6] = (size.cols >> 8) & 0xFF    # 列数高字节
                 size_data[7] = size.cols & 0xFF           # 列数低字节
                 self.socket.send(size_data)
-                
                 logger.debug(f"Sent terminal size: {size.rows}x{size.cols}")
             except Exception as e:
                 logger.error(f"Failed to send terminal size: {e}")
@@ -149,8 +148,7 @@ class WindowsPtyClient:
                     # 检查是否包含 exit 消息
                     try:
                         decoded_data = data.decode('utf-8', errors='ignore')
-                        
-                        if "Exit cleaning up..." in decoded_data:
+                        if decoded_data == '\r\nexit\r\n' or decoded_data == 'exit\r\n' or decoded_data == 'exit' or decoded_data == '\r\nexit':
                             self.running = False
                             # 确保最后的输出能够显示
                             # self.output_queue.put(data)
@@ -167,11 +165,6 @@ class WindowsPtyClient:
                         self.terminal_size = self.get_terminal_size()
                         
                         self.send_terminal_size(self.terminal_size)
-                        
-                        decoded_data.replace("Connected with correct identifier.", "1")
-                        
-                        self.output_queue.put(decoded_data)
-
                         continue
 
                     self.output_queue.put(data)
@@ -270,7 +263,7 @@ def main():
         
     parser = argparse.ArgumentParser(description='Windows PTY Client')
     parser.add_argument('host', help='Server host')
-    parser.add_argument('--port', type=int, default=8082, help='Server port')
+    parser.add_argument('--port', type=int, default=8080, help='Server port')
     parser.add_argument('--identifier', required=True, help='Unique 16-character session identifier')
     parser.add_argument('--debug', action='store_true', help='Enable debug logging')
     args = parser.parse_args()
