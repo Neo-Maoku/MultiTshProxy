@@ -27,3 +27,6 @@ https://github.com/user-attachments/assets/f63cff76-f988-44bb-bd62-d53d914f2efc
 - 修复了tsh项目中客户端窗口大小变动后被控端无法响应缺陷
 - 操作方便，只需要在服务器部署代理服务端，就能在本机代理操作tsh客户端输入输出
 
+### 微信公众号文章地址
+
+https://mp.weixin.qq.com/s/tgaETUl_84wTfRSZmomoHQ
